@@ -1,0 +1,26 @@
+---
+import { formatBlogPosts, slugify } from "../../utils/helpers";
+const allPosts = await Astro.glob("../posts/*.md");
+const categories = [
+  ...new Set(allPosts.map((post) => slugify(post.frontmatter.categories)),
+)];
+const title = "Categories";
+---
+
+<div class="py-12 mx-auto">
+  <h3 class="relative w-full flex items-center my-8">
+    <span class="pr-3 text-sm text-gray-500 !relative uppercase">{title}</span>
+    <span
+      class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-blue-600 before:right-0"
+    ></span>
+  </h3>
+  <div class="tags flex flex-wrap">
+    {
+      categories.map((categories) => (
+        <p class="tag capitalize text-blue-600 font-bold px-6 py-2">
+          <a href={"/"+`../categories/${categories}`}> {categories}</a>
+        </p>
+      ))
+    }
+  </div>
+</div>

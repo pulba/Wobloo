@@ -1,0 +1,93 @@
+---
+import Logo from "../components/logo.astro";
+import Social from "./social.astro";
+
+
+const links = [
+  { name: "Home", href: "/", current: true },
+  { name: "Blog", href: "/posts", current: true },
+  { name: "About", href: "/about", current: true },
+  { name: "Contact", href: "/contact", current: true },
+];
+---
+
+<nav class="bg-white py-8 mx-auto shadow-[0_5px_8px_rgb(0,0,0,0.12)]">
+  <div class="max-w-7xl mx-auto md:flex items-center justify-between">
+    <div class="flex items-center justify-between">
+      <Logo link="/" name="Front" namesc="matter" primaryst="text-blue-600" primarysc="text-gray-600" />
+      <div class="md:hidden">
+        <svg
+          id="icon1"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="gray-800"
+          class="size-6 stroke-gray-800">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"></path>
+        </svg>
+        <svg
+          id="icon2"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="gray-800"
+          class="size-6 hidden stroke-gray-800">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"></path>
+        </svg>
+      </div>
+    </div>
+    <ul
+      id="menu"
+      class="flex flex-col md:flex-row gap-6 mt-8 md:mt-0 hidden md:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="text-gray-600 font-montserrat hover:text-blue-600 font-bold">
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div
+      id="btn"
+      class="hidden md:block mt-5 md:mt-0 max-w-1/2 mx-auto md:mx-0">
+      <Social />
+    </div>
+  </div>
+</nav>
+<script>
+  document.getElementById("icon1").addEventListener("click", function () {
+    document.getElementById("icon1").classList.add("hidden");
+    document.getElementById("icon2").classList.remove("hidden");
+    document.getElementById("menu").classList.remove("hidden");
+    document.getElementById("btn").classList.remove("hidden");
+  });
+  document.getElementById("icon2").addEventListener("click", function () {
+    document.getElementById("icon2").classList.add("hidden");
+    document.getElementById("icon1").classList.remove("hidden");
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("btn").classList.add("hidden");
+  });
+
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("#menu a")
+  );
+
+  links.forEach((link) => {
+    link.addEventListener("click", function () {
+      links.forEach((l) => l.classList.remove("active"));
+      this.classList.add("active");
+    });
+  });
+</script>

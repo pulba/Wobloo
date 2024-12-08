@@ -1,0 +1,13 @@
+---
+import Icon from "./icon.astro"
+
+const { text, primary, path, href} = Astro.props;
+---
+
+
+<a href={href} class="px-4 py-2 mx-1 text-white transition-colors duration-300 transform bg-blue-600 rounded-md flex items-center -mx-1">
+    <Icon path={path} primary={primary}/>
+        <span class="mx-1">
+            {text}
+        </span>
+</a>

@@ -1,0 +1,10 @@
+---
+import '@fontsource-variable/montserrat';
+import Primary from './primary.astro';
+const {link, name, namesc, primaryst, primarysc} = Astro.props;
+---
+
+
+<div class=`${primaryst} text-3xl font-montserrat`>
+    <a href={link}>{name}<span class=`${primarysc} font-bold`>{namesc}</span>.</a>
+</div>

@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-iconify";
+import { Image, getImage } from "astro:assets";
+import { slugify, formatDate } from "../utils/helpers";
+const Posts = await Astro.glob("../pages/posts/*.md");
+const { frontmatter, url } = Astro.props;
+const { title, date, author, image, description, categories} = frontmatter; 
+---
+
+
+
+<a href={url}>
+    <Image
+      src={image.src}
+      width="1600"
+      height="300"
+      alt={image.alt}
+      format="webp"
+      class="rounded-t-md aspect-video"
+    />
+  </a>
+  <div class="px-6 py-12">
+      <a 
+      href={"/"+`/categories/${slugify(categories)}/`} 
+      class="font-josefin uppercase text-sm text-blue-600"
+    >{categories}
+    </a>
+
+    <a href={url}>
+      <h4 class="font-bold font-josefin text-2xl sm:text-2xl capitalize hover:text-blue-600">
+        {title}
+      </h4>
+    </a>
+    <p class="my-2">
+      {description}
+      <a href={url} class="text-blue-600">
+        ..Read more
+      </a>
+    </p>
+    <div class="flex gap-2 items-end text-gray-500 text-sm">
+      <a href={`/author/${slugify(author)}/`} class="flex gap-1 items-center">
+        <Icon name="mdi:account" class="w-4 h-4" />
+        {author}
+      </a>
+      <span class="flex gap-1 items-center">
+        <Icon name="mdi:access-time" class="w-4 h-4" />
+        {formatDate(date)}
+      </span>
+    </div>
+  </div>

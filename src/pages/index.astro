@@ -1,0 +1,60 @@
+---
+import Home from "../layouts/home.astro";
+import Aside from "../layouts/aside.astro";
+import Postcard from "../components/postcard.astro";
+import { formatBlogPosts } from "../utils/helpers";
+
+const allPosts = await Astro.glob("./posts/*.md");
+const formatPosts = formatBlogPosts(allPosts);
+const { title, desc } = Astro.props;
+---
+
+<Home>
+  <section>
+    <div class="container px-6 py-12 mx-auto">
+      <div
+        class="flex flex-col lg:flex-row gap-y-8 lg:divide-x divide-gray-100">
+        <div class="w-full lg:w-2/3 lg:px-8">
+          <div class="">
+            <h3 class="relative w-full flex items-center my-8">
+              <span class="pr-3 text-lg text-blue-600 !relative"
+                >FEATURED POST
+              </span>
+              <span
+                class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-blue-600 before:right-0"
+              ></span>
+            </h3>
+            {
+              formatPosts
+              .slice(0, 1)
+              .map((post) => (
+                <div class="text-gray-800 flex flex-col md:flex-row items-center md:items-start gap-4 rounded-md [&>div]:px-6 [&>div]:py-12 [&>div]:md:py-0 [&>div]:bg-white [&>div]:ronded-md [&>div]:-mt-20 [&>div]:mx-4 [&>div]:md:mx-0 [&>div]:md:mt-0 [&>div]:shadow-xl [&>div]:md:shadow-none">
+                  <Postcard frontmatter={post.frontmatter} url={post.url} />
+                </div>
+              ))
+            }
+
+          </div>
+          <h3 class="relative w-full flex items-center my-12">
+            <span class="pr-3 text-lg text-blue-600 !relative"
+              >LATEST POSTS
+            </span>
+            <span
+              class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-blue-600 before:right-0"
+            ></span>
+          </h3>
+          <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8">
+            {formatPosts
+            .slice(0, 9)
+            .map((post) => 
+            <div class="text-gray-800 border rounded-md shadow-xl">
+              <Postcard frontmatter={post.frontmatter} url={post.url} />    
+            </div>
+            )}
+          </div>
+        </div>
+        <Aside />
+      </div>
+    </div>
+  </section>
+</Home>
