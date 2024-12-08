@@ -5,7 +5,7 @@ date: "2024-07-01"
 description: "I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come"
 author: "Astro Learner"
 image:
-  src: "/src/assets/images/cover.jpg"
+  src: "/src/assets/images/cover.webp"
   alt: "The Astro logo with the word One."
 tags: ["ChatGPT"]
 categories: ["Tech"]
