@@ -5,42 +5,42 @@ module.exports = {
 			typography: {
 			  DEFAULT: {
 				css: {
-					maxWidth: '128ch',
-					marginTop: '0em',
+					maxWidth: '100%',
+					marginTop: '0.5em',
 					h1: {
 						fontSize: '36px',
-						marginTop: '0em',
+						marginTop: '0.5em',
 						marginBottom: '0em',
 					  },
 					h2: {
 						fontSize: '30px',
-						marginTop: '0em',
+						marginTop: '0.5em',
 						marginBottom: '0em',
 					  },
 					h3: {
 						fontSize: '24px',
-						marginTop: '0em',
+						marginTop: '0.5em',
 						marginBottom: '0em',
 					  },
 					h4: {
 						fontSize: '20px',
-						marginTop: '0em',
+						marginTop: '0.5em',
 						marginBottom: '0em',
 					  },
 					h5: {
 						fontSize: '18px',
-						marginTop: '0em',
+						marginTop: '0.5em',
 						marginBottom: '0em',
 					  },
 					h6: {
 					  fontSize: '16px',
-					  marginTop: '0em',
+					  marginTop: '0.5em',
 					  marginBottom: '0em',
 					},
 				  p: {
 					fontSize: '16px',
 					color: '#4a5568',
-					marginTop: '0em',
+					marginTop: '0.5em',
 					marginBottom: '0em',
 					fontFamily: {
 						montserrat: ['Montserrat Variable', 'sans-serif'],

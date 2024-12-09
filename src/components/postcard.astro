@@ -1,8 +1,7 @@
 ---
 import { Icon } from "astro-iconify";
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import { slugify, formatDate } from "../utils/helpers";
-const Posts = await Astro.glob("../pages/posts/*.md");
 const { frontmatter, url } = Astro.props;
 const { title, date, author, image, description, categories} = frontmatter; 
 ---
