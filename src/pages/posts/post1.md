@@ -5,7 +5,7 @@ date: "2024-07-01"
 description: "I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come"
 author: "Astro Learner"
 image:
-  src: "/assets/img1.webp"
+  img: "/assets/img1.webp"
   alt: "The Astro logo with the word One."
 tags: ["Update"]
 categories: ["News"]

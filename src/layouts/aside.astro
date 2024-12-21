@@ -25,14 +25,7 @@ const { frontmatter, url } = Astro.props;
       formatPosts.slice(0, 5).map((post) => (
         <div class="w-full flex gap-2 mx-auto text-gray-800 mb-5">
           <a href={post.url}>
-            <Image
-              src={post.frontmatter.image.src}
-              width="200"
-              height="500"
-              alt={post.frontmatter.image.alt}
-              format="webp"
-              class="w-56 h-28 rounded-md"
-            />
+          <img src={post.frontmatter.image.img} alt={post.frontmatter.image.alt} class="w-56 h-28 rounded-md" />
           </a>
           <div class="ps-3 mb-5 w-full">
             <p class="text-gray-500 text-xs">

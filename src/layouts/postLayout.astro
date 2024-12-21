@@ -32,7 +32,7 @@ const { title, desc, frontmatter } = Astro.props;
               </span>
             </p>
           </div>
-          <img src={frontmatter.image.src} alt={frontmatter.image.alt} class="mb-12 aspect-video">
+          <img src={frontmatter.image.img} alt={frontmatter.image.alt} class="mb-12 aspect-video" />
           <div class="prose prose-a:text-blue-600 hover:prose-a:text-blue-500">
             <slot />
           </div>
