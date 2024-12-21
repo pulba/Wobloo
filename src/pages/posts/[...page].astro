@@ -6,7 +6,7 @@ import { formatBlogPosts } from "../../utils/helpers";
 import Pagination from "../../components/pagination.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob("./*.md");
+  const allPosts = import.meta.glob('./posts/*.md', { eager: true });
   const formatPosts = formatBlogPosts(allPosts);
 
   return paginate(formatPosts, {

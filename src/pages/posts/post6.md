@@ -5,7 +5,7 @@ date: "2024-01-07"
 description: "I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come"
 author: "Astro Learner"
 image:
-  src: "/src/assets/images/img2.webp"
+  src: "/assets/images/img2.webp"
   alt: "The Astro logo with the word One."
 tags: ["HTML"]
 categories: ["Programming "]
