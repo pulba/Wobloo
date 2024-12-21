@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-iconify";
 import Aside from "./aside.astro";
 import { formatDate, slugify } from "../utils/helpers";
-const { title, desc, author, content, frontmatter } = Astro.props;
+const { title, desc, frontmatter } = Astro.props;
 ---
 
 <Main title={title} desc={desc}>

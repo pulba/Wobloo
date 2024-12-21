@@ -3,9 +3,9 @@ import Home from "../layouts/home.astro";
 import Aside from "../layouts/aside.astro";
 import Postcard from "../components/postcard.astro";
 import { formatBlogPosts } from "../utils/helpers";
-
-const allPosts = await Astro.glob("./posts/*.md");
-const formatPosts = formatBlogPosts(allPosts);
+const matches = await import.meta.glob('./posts/*.md', { eager: true });
+const posts = Object.values(matches);
+const formatPosts = formatBlogPosts(posts);
 const { title, desc } = Astro.props;
 ---
 

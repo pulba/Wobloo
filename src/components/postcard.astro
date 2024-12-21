@@ -6,8 +6,6 @@ const { frontmatter, url } = Astro.props;
 const { title, date, author, image, description, categories} = frontmatter; 
 ---
 
-
-
 <a href={url}>
     <Image
       src={image.src}
@@ -15,7 +13,7 @@ const { title, date, author, image, description, categories} = frontmatter;
       height="300"
       alt={image.alt}
       format="webp"
-      class="rounded-t-md aspect-video"
+      class="w-full rounded-t-md aspect-video"
     />
   </a>
   <div class="px-6 py-12">
