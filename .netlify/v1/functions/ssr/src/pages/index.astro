@@ -1,0 +1,71 @@
+---
+import Home from "../layouts/home.astro";
+import Aside from "../layouts/aside.astro";
+import Postcard from "../components/postcard.astro";
+import { formatBlogPosts } from "../utils/helpers";
+const matches = await import.meta.glob('./posts/*.md', { eager: true });
+const posts = Object.values(matches);
+const formatPosts = formatBlogPosts(posts);
+const { title, desc } = Astro.props;
+---
+
+<Home>
+  <section>
+    <div class="container px-6 py-12 mx-auto">
+      <div
+        class="flex flex-col lg:flex-row gap-y-8 lg:divide-x divide-gray-100">
+        <div class="w-full lg:w-2/3 lg:px-8">
+          <div class="">
+            <h3 class="relative w-full flex items-center my-8">
+              <span class="pr-3 text-lg text-pink-900 uppercase !relative"
+                >Future Posts
+              </span>
+              <span
+                class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-pink-900 before:right-0"
+              ></span>
+            </h3>
+            <div class="flex flex-col md:flex-row gap-4">
+              {
+                formatPosts
+                .slice(0, 1)
+                .map((post) => (
+                  <div class="relative overflow-hidden text-gray-900 bg-gray-100 flex flex-col items-center rounded-t-md [&>.desc]:p-6 [&>div>a>img]:rounded-t-md">
+                    <Postcard frontmatter={post.frontmatter} url={post.url} />
+                  </div>
+                ))
+              }
+              <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-8">
+                {formatPosts
+                .slice(1, 4)
+                .map((post) => 
+                <div class="relative overflow-hidden text-gray-900 bg-gray-100 border p-2 flex flex-col md:flex-row items-start gap-2 rounded-md shadow-xl [&>div]:relative [&>div]:overflow-hidden [&>div]:rounded-md [&>div>a>img]:md:h-28 [&>div>a>img]:md:w-64 hover:[&>div>a>img]:rounded-md [&>div>a>img]:rounded-b-md [&>div]:md:px-0 [&>div]:md:py-0 [&>div>a]:md:text-[10px] [&>div>a>h4]:md:text-sm [&>div>div>a]:md:hidden [&>div>p]:md:hidden">
+                  <Postcard frontmatter={post.frontmatter} url={post.url} />    
+                </div>
+                )}
+              </div>
+            </div>
+
+          </div>
+          <h3 class="relative w-full flex items-center my-12">
+            <span class="pr-3 text-lg text-pink-900 !relative"
+              >LATEST POSTS
+            </span>
+            <span
+              class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-pink-900 before:right-0"
+            ></span>
+          </h3>
+          <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8 [&>div]:overflow-hidden [&>div>a>img]:hover:rounded-t-md">
+            {formatPosts
+            .slice(4, 9)
+            .map((post) => 
+            <div class="relative overflow-hidden text-gray-900 bg-gray-100 flex flex-col items-center rounded-t-md [&>.desc]:p-6 [&>div>a>img]:rounded-t-md">
+              <Postcard frontmatter={post.frontmatter} url={post.url} />    
+            </div>
+            )}
+          </div>
+        </div>
+        <Aside />
+      </div>
+    </div>
+  </section>
+</Home>
