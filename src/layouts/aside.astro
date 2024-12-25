@@ -1,42 +1,41 @@
 ---
 import Tag from "../pages/tags/index.astro";
 import Categories from "../pages/categories/index.astro";
-import { Image } from "astro:assets";
 import { Icon } from "astro-iconify";
 import { formatBlogPosts } from "../utils/helpers";
 import { slugify, formatDate } from "../utils/helpers";
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const posts = import.meta.glob('../pages/posts/*.md', { eager: true }) as Record<string, any>;
+const allPosts = Object.values(posts);
 const formatPosts = formatBlogPosts(allPosts);
 const { frontmatter, url } = Astro.props;
-// const { title, date, author, image, description, categories} = frontmatter; 
 
 
 ---
 
 <div class="font-montserrat w-full lg:w-1/3 lg:px-8">
   <h3 class="relative w-full flex items-center my-8">
-    <span class="pr-3 text-sm text-blue-600 !relative">POPULAR POSTS</span>
+    <span class="pr-3 text-sm text-pink-900 !relative">POPULAR POSTS</span>
     <span
-      class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-blue-600 before:right-0"
+      class="relative flex-grow h-1 bg-gray-100 before:content-[''] before:absolute before:h-1 before:w-8 before:bg-pink-900 before:right-0"
     ></span>
   </h3>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
     {
       formatPosts.slice(0, 5).map((post) => (
-        <div class="w-full flex gap-2 mx-auto text-gray-800 mb-5">
+        <div class="w-full flex gap-2 mx-auto rounded-md shadow-xl bg-gray-100 text-gray-900 p-4 mb-5">
           <a href={post.url}>
-          <img src={post.frontmatter.image.img} alt={post.frontmatter.image.alt} class="w-56 h-28 rounded-md" />
+          <img src={post.frontmatter.image.img} alt={post.frontmatter.image.alt} class="w-44 h-24 rounded-md object-center object-cover" />
           </a>
-          <div class="ps-3 mb-5 w-full">
-            <p class="text-gray-500 text-xs">
+          <div class="ps-3 w-full">
+            <p class="text-gray-500 text-[10px]">
               <a
                 href={`/categories/${slugify(post.frontmatter.categories)}/`}
-                class="flex gap-1 items-center uppercase transition-all duration-300 ease-linear text-blue-600">
+                class="uppercase text-pink-900">
                 {post.frontmatter.categories}
               </a>
             </p>
             <a href={post.url}>
-              <h4 class="font-bold font-josefin text-sm capitalize transition-all duration-300 ease-linear hover:text-blue-600">
+              <h4 class="font-bold font-josefin my-2 text-sm capitalize transition-all duration-300 ease-linear hover:text-gray-600 text-pink-900">
                 {post.frontmatter.title}
               </h4>
             </a>

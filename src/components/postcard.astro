@@ -1,39 +1,40 @@
 ---
-import { Icon } from "astro-iconify";
-import { Image } from "astro:assets";
+import Icon from "./icon.astro";
 import { slugify, formatDate } from "../utils/helpers";
 const { frontmatter, url } = Astro.props;
 const { title, date, author, image, description, categories} = frontmatter; 
 ---
 
-<a href={url}>
-    <img src={image.img} alt={image.alt} class="w-full rounded-t-md aspect-video" />
+<div class="relative overflow-hidden w-full">
+  <a href={url}>
+    <img src={image.img} alt={image.alt} class="w-full rounded-t-md aspect-video object-center object-cover hover:scale-110 hover:rounded-md transition-all ease-linear duration-300" />
   </a>
-  <div class="px-6 py-12">
+</div>
+  <div class="desc px-6 py-12 w-full">
       <a 
       href={"/"+`/categories/${slugify(categories)}/`} 
-      class="font-josefin uppercase text-sm text-blue-600"
+      class="font-geist uppercase text-sm text-pink-900"
     >{categories}
     </a>
 
     <a href={url}>
-      <h4 class="font-bold font-josefin text-2xl sm:text-2xl capitalize hover:text-blue-600">
+      <h4 class="font-bold font-josefin text-2xl sm:text-2xl capitalize hover:text-pink-900 text-gray-600">
         {title}
       </h4>
     </a>
     <p class="my-2">
       {description}
-      <a href={url} class="text-blue-600">
+      <a href={url} class="text-pink-900">
         ..Read more
       </a>
     </p>
     <div class="flex gap-2 items-end text-gray-500 text-sm">
       <a href={`/author/${slugify(author)}/`} class="flex gap-1 items-center">
-        <Icon name="mdi:account" class="w-4 h-4" />
+        <Icon primary="w-4 h-4" path="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         {author}
       </a>
       <span class="flex gap-1 items-center">
-        <Icon name="mdi:access-time" class="w-4 h-4" />
+        <Icon primary="w-4 h-4" path="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         {formatDate(date)}
       </span>
     </div>

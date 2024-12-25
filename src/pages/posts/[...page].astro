@@ -5,41 +5,36 @@ import Postcard from "../../components/postcard.astro";
 import { formatBlogPosts } from "../../utils/helpers";
 import Pagination from "../../components/pagination.astro";
 
-export async function getStaticPaths({ paginate }) {
-  const allPosts = import.meta.glob('./posts/*.md', { eager: true });
-  const formatPosts = formatBlogPosts(allPosts);
+const allPosts = import.meta.glob('../posts/*.md', { eager: true });
 
-  return paginate(formatPosts, {
-    pageSize: 5,
-  });
-}
-type PaginationPage = {
-  data: Array<{
-    frontmatter: any;
-    file: string;
-    url: string;
-    rawContent: string;
-    compiledContent: string;
-    getHeadings: () => any;
-    Content: any;
-    default: Function;
-  }>;
-  start: number;
-  end: number;
-  size: number;
-  total: number;
-  currentPage: number;
-  lastPage: number;
-  url: {
-    current: string;
-    next?: string;
-    prev?: string;
-    first?: string;
-    last?: string;
+interface BlogPost {
+  frontmatter: {
+    title: string;
+    date: string;
+    excerpt: string;
   };
-};
+  url: string;
+}
 
-const { page } = Astro.props as { page: PaginationPage };
+// Konversi ke array dan beri tahu TypeScript tipe dari objeknya
+const posts = Object.values(allPosts)
+  .map((post) => post as BlogPost)
+  .sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date).getTime();
+    const dateB = new Date(b.frontmatter.date).getTime();
+    return dateB - dateA;
+  });
+
+const ITEMS_PER_PAGE = 5;
+const currentPage = parseInt(Astro.params.page) || 1;
+const totalPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
+
+const start = (currentPage - 1) * ITEMS_PER_PAGE;
+const end = start + ITEMS_PER_PAGE;
+const paginatedPosts = posts.slice(start, end);
+
+const prevUrl = currentPage > 1 ? `/posts/${currentPage - 1}` : null;
+const nextUrl = currentPage < totalPages ? `/posts/${currentPage + 1}` : null;
 
 ---
 
@@ -50,15 +45,13 @@ const { page } = Astro.props as { page: PaginationPage };
         class="flex flex-col lg:flex-row gap-y-8 lg:divide-x divide-gray-100">
           <div class="w-full lg:w-2/3 lg:px-8 my-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8">
-              {
-              page.data.map((post) => (
-                <div class="text-gray-800 border rounded-md shadow-xl">
-                  <Postcard frontmatter={post.frontmatter} url={post.url} />    
+              {paginatedPosts.map((post) => (
+                <div class="border rounded-lg shadow-lg">
+                    <Postcard frontmatter={post.frontmatter} url={post.url} />
                 </div>
-                )
-              )}
+              ))}
             </div>
-            <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />            
+            <Pagination prevUrl={prevUrl} nextUrl={nextUrl} />           
           </div>
         <Aside />
       </div>

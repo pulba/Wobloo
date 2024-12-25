@@ -1,14 +1,14 @@
 ---
 layout: ../../layouts/postLayout.astro
 title: "Discover the Power of Lorem Ipsum"
-date: "2024-01-07"
+date: "2024-12-06"
 description: "I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come"
 author: "Astro Learner"
 image:
-  img: "/assets/img2.webp"
+  img: "/assets/4.webp"
   alt: "The Astro logo with the word One."
-tags: ["HTML"]
-categories: ["Programming "]
+tags: ["Aksesoris"]
+categories: ["Aksesoris "]
 ---
 
 

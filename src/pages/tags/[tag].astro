@@ -7,27 +7,31 @@ import { formatBlogPosts, slugify } from "../../utils/helpers";
 export async function getStaticPaths() {
   return [
     {
-      params: { tag: slugify("HTML")},
-      props: { name: "HTML"},
+      params: { tag: slugify("aksesoris")},
+      props: { name: "aksesoris"},
     },
     {
-      params: { tag: slugify("ChatGPT")},
-      props: { name: "ChatGPT"},
+      params: { tag: slugify("sepatu")},
+      props: { name: "sepatu"},
     },
     {
-      params: { tag: slugify("Laptop")},
-      props: { name: "laptop"},
+      params: { tag: slugify("tas")},
+      props: { name: "tas"},
     },
     {
-      params: { tag: slugify("Update")},
-      props: { name: "Update"},
+      params: { tag: slugify("streetwear")},
+      props: { name: "streetwear"},
+    },
+    {
+      params: { tag: slugify("baju")},
+      props: { name: "baju"},
     },
   ]
 }
 
 const { tag } = Astro.params;
-const { name } = Astro.props;
-const allPosts = await Astro.glob("../posts/*.md");
+const posts = import.meta.glob('../posts/*.md', { eager: true }) as Record<string, any>;
+const allPosts = Object.values(posts);
 const formatedPosts = formatBlogPosts(allPosts);
 const tagPosts = formatedPosts.filter(
   (post) => slugify(post.frontmatter.tags) === tag
@@ -41,7 +45,7 @@ const tagPosts = formatedPosts.filter(
         class="flex flex-col lg:flex-row gap-y-8 lg:divide-x divide-gray-100">
         <div class="w-full lg:w-2/3 lg:px-8">
           <h3 class="text-2xl capitalize text-center font-bold py-6">
-            Posts about <span class="text-blue-600">{name}</span>
+            Posts about <span class="text-pink-900">{tag}</span>
           </h3>
           <div class="w-full lg:px-8 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8">
             {
